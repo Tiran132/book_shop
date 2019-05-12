@@ -43,6 +43,18 @@ def show_categories(request):
     return HttpResponse(result)
 
 
+def show_books(request):
+    books = Book.objects.all()
+
+    result = render_to_string('books.html', {
+        'title': 'TEST',
+        'text': 'some text',
+        'books': books,
+    })
+
+    return HttpResponse(result)
+
+
 def show_category_one(request, category_id):
     category = Category.objects.get(id=category_id)
     books = category.books.all()
