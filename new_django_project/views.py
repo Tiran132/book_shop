@@ -17,3 +17,41 @@ def show_main_page(request):
     })
 
     return HttpResponse(result)
+
+
+def show_book_details(request, book_id):
+    book = Book.objects.get(id=book_id)
+
+    result = render_to_string('book.html', {
+        'title': 'TEST',
+        'text': 'some text',
+        'book': book,
+    })
+
+    return HttpResponse(result)
+
+
+def show_categories(request):
+    categories = Category.objects.all()
+
+    result = render_to_string('categories.html', {
+        'title': 'TEST',
+        'text': 'some text',
+        'categories': categories,
+    })
+
+    return HttpResponse(result)
+
+
+def show_category_one(request, category_id):
+    category = Category.objects.get(id=category_id)
+    books = category.books.all()
+
+    result = render_to_string('category.html', {
+        'title': 'TEST',
+        'text': 'some text',
+        'category': category,
+        'books': books,
+    })
+
+    return HttpResponse(result)
